@@ -1,1 +1,1 @@
-# Backend for the Trep application
+# Backend for Trep

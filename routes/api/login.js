@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 //Token verification middleware
 
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
   const usernameOrEmail = req.body.usernameOrEmail;
   const password = req.body.password;
 

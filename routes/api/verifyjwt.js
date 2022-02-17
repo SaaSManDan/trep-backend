@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require("jsonwebtoken");
 
 function verifyToken(req, res, next){
@@ -13,7 +14,7 @@ function verifyToken(req, res, next){
     req.token = bearerToken;
     console.log("Token being attempted: " + bearerToken);
 
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
+    jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, authData) => {
       if (err){
         return res.send("Error: Invalid Token - This will trigger redirect to login page.");
       };

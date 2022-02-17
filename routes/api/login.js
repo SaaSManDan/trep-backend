@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { conn } = require("./dbconnect.js");
@@ -28,7 +29,7 @@ router.get("/", (req, res) => {
       const match = await bcrypt.compareSync(password, hashedPass);
       if(match){
         const user_id = results[0].user_id;
-        var token = jwt.sign({ user_id : user_id }, 'secretkey');
+        var token = jwt.sign({ user_id : user_id }, process.env.SECRET_JWT_KEY);
         console.log(token);
         return res.send("Your password was correct, you have successfully logged in!");
       }

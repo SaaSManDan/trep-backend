@@ -31,10 +31,10 @@ router.post("/", (req, res) => {
         const user_id = results[0].user_id;
         var token = jwt.sign({ user_id : user_id }, process.env.SECRET_JWT_KEY);
         console.log(token);
-        return res.send("Your password was correct, you have successfully logged in!");
+        return res.json({ success: true, token : token });
       }
     }
-    return res.send("These login details are incorrect, try again.");
+    return res.json({ success: false, msg : "These login details were incorrect, please try again." });
   });
 
 });

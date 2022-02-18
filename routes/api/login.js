@@ -31,11 +31,11 @@ router.post("/", (req, res) => {
         const user_id = results[0].user_id;
         var token = jwt.sign({ user_id : user_id }, process.env.SECRET_JWT_KEY);
         console.log(token);
-        return res.json({ success: true, token : token });
+        return res.json({ success: true, token : token, msg : "You've been successfully logged in!" });
       }
     }
     //
-    return res.json({ success: false, msg : "These login details were incorrect, please try again." });
+    return res.json({ success: false, token: null, msg : "These login details were incorrect, please try again." });
   });
 
 });

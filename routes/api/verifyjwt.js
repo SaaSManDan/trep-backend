@@ -16,7 +16,8 @@ function verifyToken(req, res, next){
 
     jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, authData) => {
       if (err){
-        return res.send("Error: Invalid Token - This will trigger redirect to login page.");
+        console.log("Error!!!!!")
+        return res.status(401).send("Invalid JWT.");
       };
       console.log("This token is genuine: " + JSON.stringify(authData));
       req.user_id = authData.user_id;
@@ -25,7 +26,7 @@ function verifyToken(req, res, next){
   } else {
     //There is no bearer token present
     //send an error that will trigger redirect to login page
-    return res.send("Error: Invalid Token - This will trigger redirect to login page.");
+    return res.status(401).send("Invalid JWT.");
   }
 }
 

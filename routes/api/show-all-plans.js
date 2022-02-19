@@ -13,7 +13,8 @@ router.get("/", verifyToken, (req, res) => {
   conn.query(sql, req.user_id, async function (err, results, fields) {
     if (err) throw err;
     if(results.length > 0){
-      return res.send(results);
+      console.log("User's current plans were found.")
+      return res.json(results);
     } else {
       return res.send("You currently do not have any upcoming plans.");
     }

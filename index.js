@@ -24,6 +24,6 @@ app.use("/api/register/", require("./routes/api/registration"));
 app.use("/api/login/", require("./routes/api/login"));
 app.use("/api/show-all-plans/", require("./routes/api/show-all-plans"));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT);

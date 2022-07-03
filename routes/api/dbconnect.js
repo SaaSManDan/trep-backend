@@ -10,7 +10,7 @@ const conn = mysql.createConnection({
 
 conn.connect(function(err) {
   if (err) throw err;
-  console.log("Successfully connected to the Trep database!");
+  console.log("[Dev Environment] Successfully connected to the Trep database!");
 });
 
 module.exports = { conn };

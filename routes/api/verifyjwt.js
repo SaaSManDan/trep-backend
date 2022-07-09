@@ -17,7 +17,7 @@ function verifyToken(req, res, next){
     jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, authData) => {
       if (err){
         console.log("Error!!!!!")
-        return res.status(401).send("Invalid JWT.");
+        return res.status(401).json({ errorMsg: "The JWT was invalid."});
       };
       console.log("This token is genuine: " + JSON.stringify(authData));
       req.user_id = authData.user_id;

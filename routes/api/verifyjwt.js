@@ -26,7 +26,7 @@ function verifyToken(req, res, next){
   } else {
     //There is no bearer token present
     //send an error that will trigger redirect to login page
-    return res.status(401).json({ errorMsg: "Invalid JWT"});
+    return res.status(401).json({ errorMsg: "The JWT was invalid."});
   }
 }
 

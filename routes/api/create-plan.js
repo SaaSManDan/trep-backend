@@ -3,6 +3,7 @@ const validator = require("validator");
 const app = express();
 const bodyParser = require("body-parser");
 const { conn } = require("./dbconnect.js");
+const { verifyToken } = require("./verifyjwt.js");
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-router.post("/", async(req, res) => {
+router.post("/", verifyToken, async(req, res) => {
   const name_of_plan = req.body.name_of_plan;
   const head_planner_id = req.body.head_planner_id;
   const trip_start_date = req.body.trip_start_date;
@@ -29,7 +30,7 @@ router.post("/", async(req, res) => {
     if (err) throw err;
       console.log("This plan's id is: " + results.insertId + " and your user id is: " + head_planner_id);
 
-      
+
       const uwp_info = [
         [head_planner_id, results.insertId]
       ];

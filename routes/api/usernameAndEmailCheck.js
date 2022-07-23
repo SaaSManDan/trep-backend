@@ -35,4 +35,4 @@ function checkIfEmailExists(email){
   })
 }
 
-module.exports = { checkIfUsernameExists, checkIfEmailExists };
+module.exports = { checkIfEmailExists };

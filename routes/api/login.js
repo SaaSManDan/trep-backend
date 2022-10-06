@@ -17,11 +17,11 @@ app.use(bodyParser.json());
 
 
 router.post("/", (req, res) => {
-  const usernameOrEmail = req.body.usernameOrEmail;
+  const email = req.body.email;
   const password = req.body.password;
 
-  var sql = "SELECT user_id, username, password FROM users WHERE username = ? OR email = ?";
-  conn.query(sql, [usernameOrEmail, usernameOrEmail], async function (err, results, fields) {
+  var sql = "SELECT user_id, first_name, password FROM users WHERE email = ?";
+  conn.query(sql, [email], async function (err, results, fields) {
     if (err) throw err;
     if(results.length > 0){
       hashedPass = results[0].password;
@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
         const user_id = results[0].user_id;
         var token = jwt.sign({ user_id : user_id }, process.env.SECRET_JWT_KEY);
         console.log(token);
-        return res.json({ success: true, token : token, msg : "You've been successfully logged in!", username: results[0].username });
+        return res.json({ success: true, token : token, msg : "You've been successfully logged in!", firstName: results[0].first_name });
       }
     }
     //

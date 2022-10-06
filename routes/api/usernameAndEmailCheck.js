@@ -1,6 +1,6 @@
 const { conn } = require("./dbconnect.js");
 
-function checkIfUsernameExists(username){
+/*function checkIfUsernameExists(username){
   return new Promise((resolve, reject) => {
       var sql = "SELECT COUNT(username) FROM users WHERE username = ?";
       conn.query(sql, username, function (err, result, fields) {
@@ -15,7 +15,7 @@ function checkIfUsernameExists(username){
       resolve(false);
     });
   })
-}
+}*/
 
 
 function checkIfEmailExists(email){

@@ -10,7 +10,7 @@ function checkIfEmailExists(email){
       const numOfRows = JSON.stringify(result[0]["COUNT(email)"]);
       //console.log("Number of users with this email: " + numOfRows);
       if(numOfRows > 0){
-        //console.log("There is an existing user with this email.");
+        console.log("There is an existing user with this email.");
         resolve(true);
       }
       resolve(false);
@@ -28,7 +28,7 @@ function checkIfPhoneNumberExists(phone_number){
       const numOfRows = JSON.stringify(result[0]["COUNT(phone_number)"]);
       //console.log("Number of users with this phone number: " + numOfRows);
       if(numOfRows > 0){
-        //console.log("There is an existing user with this phone number.");
+        console.log("There is an existing user with this phone number.");
         resolve(true);
       }
       resolve(false);

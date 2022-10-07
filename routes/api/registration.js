@@ -25,7 +25,14 @@ router.post("/", async(req, res) => {
     const password = req.body.password;
     const reconfirmPassword = req.body.reconfirmPassword;
 
-    let validate = await validateRegistrationInfo(first_name, last_name, email, phone_number, password, reconfirmPassword);
+    console.log("First Name: " + first_name);
+    console.log("Last Name: " + last_name);
+    console.log("Email: " + email);
+    console.log("Phone number: " + phone_number);
+    console.log("Password: " + password);
+    console.log("Reconfirm pass: " + reconfirmPassword);
+
+    let validate = await validateRegistrationInfo(first_name || '', last_name || '', email || '', phone_number || '', password || '', reconfirmPassword || '');
 
     if(validate.success == false){
       return res.json(validate);

@@ -1,6 +1,7 @@
 const { checkIfPhoneNumberExists, checkIfEmailExists } = require("./phoneNumberAndEmailCheck.js");
 
 async function validateRegistrationInfo(first_name, last_name, email, phone_number, password, reconfirmPass) {
+
   if(first_name.trim().length === 0){
     return { success: false, msg: "Please enter your first name." };
   }
@@ -57,6 +58,23 @@ async function validateRegistrationInfo(first_name, last_name, email, phone_numb
     //checks if email already exists
     if(await checkIfEmailExists(email)){
       return { success: false, msg: "This email is already in use." };
+    }
+  } else if(email.trim().length != 0 && phone_number.trim().length != 0){
+    const emailCriteria = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailCriteria.test(email)){
+      return { success: false, msg: "Email format is invalid." };
+    }
+    //checks if email already exists
+    if(await checkIfEmailExists(email)){
+      return { success: false, msg: "This email is already in use." };
+    }
+
+    const phoneNumCriteria = /^[0-9]*$/;
+    if(!phoneNumCriteria.test(phone_number)){
+      return { success: false, msg: "Phone number format is invalid." };
+    }
+    if(await checkIfPhoneNumberExists(phone_number)){
+      return { success: false, msg: "This phone number is already in use." };
     }
   }
 

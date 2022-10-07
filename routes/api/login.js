@@ -17,15 +17,14 @@ app.use(bodyParser.json());
 
 
 router.post("/", (req, res) => {
-  const email = req.body.email;
+  const emailOrPhoneNumber = req.body.emailOrPhoneNumber;
   const password = req.body.password;
 
-  var sql = "SELECT user_id, first_name, password FROM users WHERE email = ?";
-  conn.query(sql, [email], async function (err, results, fields) {
+  var sql = "SELECT user_id, first_name, password FROM users WHERE email = ? OR phone_number = ?";
+  conn.query(sql, [emailOrPhoneNumber, emailOrPhoneNumber], async function (err, results, fields) {
     if (err) throw err;
     if(results.length > 0){
       hashedPass = results[0].password;
-      console.log(results);
       const match = await bcrypt.compareSync(password, hashedPass);
       if(match){
         const user_id = results[0].user_id;

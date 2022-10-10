@@ -1,12 +1,7 @@
-const express = require("express");
+require('dotenv').config();
 const jwt = require("jsonwebtoken");
-const app = express();
-const router = express.Router();
 
-//Token verification middleware
-//verifyToken();
-
-router.post("/", (req, res) => {
+function verifyToken(req, res, next){
   //Get auth header value
   const bearerHeader = req.headers['authorization'];
   //check if bearer is undefined
@@ -26,14 +21,13 @@ router.post("/", (req, res) => {
       };
       console.log("This token is genuine: " + JSON.stringify(authData));
       req.user_id = authData.user_id;
-      return res.sendStatus(200);
+      next();
     });
   } else {
     //There is no bearer token present
     //send an error that will trigger redirect to login page
     return res.status(401).json({ errorMsg: "The JWT was invalid."});
   }
-});
+}
 
-
-module.exports = router;
+module.exports = { verifyToken };

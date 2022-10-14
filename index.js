@@ -24,6 +24,8 @@ app.use("/api/register/", require("./routes/api/registration"));
 app.use("/api/login/", require("./routes/api/login"));
 app.use("/api/verifyjwt/", require("./routes/api/verifyjwt"));
 app.use("/imageViewer/", require("./routes/api/imageViewer"));
+app.use("/api/addOrInviteFriend/", require("./routes/api/addOrInviteFriend"));
+
 
 const PORT = process.env.PORT || 8080;
 

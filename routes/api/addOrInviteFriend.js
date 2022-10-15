@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const { conn } = require("../../utils/dbconnect.js");
 const router = express.Router();
 
+const { verifyToken } = require("./verifyjwtmiddleware.js");
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -19,7 +21,7 @@ function isPhoneNumber(phoneNumOrEmail){
   return false;
 }
 
-router.post('/', /* add auth token check here */ (req, res) => {
+router.post('/', verifyToken, (req, res) => {
   let emailOrPhoneNumber = req.body.emailOrPhoneNumber;
   console.log(req.body.emailOrPhoneNumber);
   var sql = "SELECT user_id, profile_image_key FROM users WHERE email = ? OR phone_number = ?";

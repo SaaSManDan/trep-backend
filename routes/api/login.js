@@ -13,14 +13,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//Token verification middleware
-
 
 router.post("/", (req, res) => {
   const emailOrPhoneNumber = req.body.emailOrPhoneNumber;
   const password = req.body.password;
 
-  var sql = "SELECT user_id, first_name, password FROM users WHERE email = ? OR phone_number = ?";
+  var sql = "SELECT user_id, first_name, password, profile_image_key FROM users WHERE email = ? OR phone_number = ?";
   conn.query(sql, [emailOrPhoneNumber, emailOrPhoneNumber], async function (err, results, fields) {
     if (err) throw err;
     if(results.length > 0){
@@ -30,7 +28,8 @@ router.post("/", (req, res) => {
         const user_id = results[0].user_id;
         var token = jwt.sign({ user_id : user_id }, process.env.SECRET_JWT_KEY);
         console.log(token);
-        return res.json({ success: true, token : token, msg : "You've been successfully logged in!", firstName: results[0].first_name, userId: results[0].user_id });
+        console.log(results[0])
+        return res.json({ success: true, token : token, msg : "You've been successfully logged in!", firstName: results[0].first_name, userId: results[0].user_id, profileImageKey: results[0].profile_image_key });
       }
     }
     //

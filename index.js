@@ -26,7 +26,7 @@ app.use("/api/verifyjwt/", require("./routes/api/verifyjwt"));
 app.use("/imageViewer/", require("./routes/api/imageViewer"));
 app.use("/api/addOrInviteFriend/", require("./routes/api/addOrInviteFriend"));
 app.use("/api/createNewPlan/", require("./routes/api/createNewPlan"));
-
+app.use("/api/showAllPlans/", require("./routes/api/showAllPlans"));
 
 const PORT = process.env.PORT || 8080;
 

@@ -26,4 +26,18 @@ router.get('/', verifyToken, (req, res) => {
   });
 });
 
+router.put('/', verifyToken, (req, res) => {
+  let plan_id = req.query.plan_id;
+  let plan_name = req.body.plan_name;
+  let trip_start_date = req.body.trip_start_date;
+  let trip_end_date = req.body.trip_end_date;
+  let location = req.body.location;
+  var sql = "UPDATE plans SET plan_name = ?, trip_start_date = ?, trip_end_date = ?, location = ? WHERE plan_id = ?";
+  conn.query(sql, [plan_name, trip_start_date, trip_end_date, location, plan_id], function(err, results){
+    if (err) throw err;
+    console.log(results);
+    return res.json(results);
+  });
+});
+
 module.exports = router;

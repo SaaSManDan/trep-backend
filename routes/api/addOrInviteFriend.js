@@ -39,7 +39,7 @@ router.post('/', verifyToken, (req, res) => {
       } else {
         email = emailOrPhoneNumber;
       }
-      return res.json({ wasUserFound: false, email: email, phoneNumber: phone_number, userId: null, profileImageKey: "default" });
+      return res.json({ wasUserFound: false, email: email, phoneNumber: phone_number, userId: null, profileImageKey: "placeholder.png" });
     }
   });
 });

@@ -26,6 +26,21 @@ router.get('/', verifyToken, (req, res) => {
   });
 });
 
+router.get('/listOfUsersOnPlan', verifyToken, (req, res) => {
+  let user_id = req.query.user_id;
+  let plan_id = req.query.plan_id;
+  var sql = "SELECT user_id from users_with_plans WHERE part_of_plan_id=? AND NOT user_id=?";
+  conn.query(sql, [plan_id, user_id], function(err, results){
+    if (err) throw err;
+    if(results.length > 0){
+      console.log(results);
+      return res.json(results);
+    } else {
+      return res.json([{ user_id: null }])
+    }
+  });
+});
+
 router.put('/', verifyToken, (req, res) => {
   let plan_id = req.query.plan_id;
   let plan_name = req.body.plan_name;
